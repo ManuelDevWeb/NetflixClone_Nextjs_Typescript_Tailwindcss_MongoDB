@@ -15,7 +15,7 @@ const Input = ({ id, value, label, onChange, type }: InputProps) => {
         type={type}
         className="block rounded-md px-6 pt-5 pb-1 w-full text-md text-white bg-neutral-700 appearance-none focus:outline-none focus:ring-0 peer"
         placeholder=" "
-        onAbort={onChange}
+        onChange={onChange}
       />
       {/* Peer permite las animaciones que vemos, al inicio empiza con scale-100 y translate-y-0, cuando se enfoca el input se cambia a scale-75 y translate-y-3 */}
       <label
