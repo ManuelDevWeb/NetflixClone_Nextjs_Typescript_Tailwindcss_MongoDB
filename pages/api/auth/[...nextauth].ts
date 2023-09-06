@@ -7,19 +7,37 @@
     Por ejemplo, si tienes un archivo llamado pages/api/[...segments].js, podrías 
     acceder a diferentes rutas de la siguiente manera:
 
-    /api/segmento: El valor de segments será ['segmento'].
-    /api/segmento1/segmento2: El valor de segments será ['segmento1', 'segmento2'].
+    /api/auth/segmento: El valor de segments será ['segmento'].
+    /api/auth/segmento1/segmento2: El valor de segments será ['segmento1', 'segmento2'].
  */
 
 import NextAuth, { RequestInternal } from 'next-auth'
-import Credentials from 'next-auth/providers/credentials'
 
+// NextAuth Providers
+import Credentials from 'next-auth/providers/credentials'
+import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
+
+// Prisma adapter
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+
+// Prisma connection
 import prismadb from '@/lib/prismadb'
 
 import {compare} from  'bcrypt'
 
 export default NextAuth({
   providers: [
+    // OAuth authentication with Github
+    GithubProvider({
+      clientId: process.env.GITHUB_ID || '',
+      clientSecret: process.env.GITHUB_SECRET || '',
+    }),
+    // OAuth authentication with Google
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    }),
     Credentials({
       id: "credentials",
       name: "Credentials",
@@ -70,6 +88,7 @@ export default NextAuth({
     signIn: "/auth",
   },
   debug: process.env.NODE_ENV === "development",
+  adapter: PrismaAdapter(prismadb),
   session: {
     strategy: "jwt",
   },
