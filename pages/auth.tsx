@@ -103,7 +103,11 @@ const Auth = () => {
               {variant === "login" ? "Login" : "Sign up"}
             </button>
             <div className="flex items-center gap-4 mt-8 justify-center">
-              <div className="bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-80 cursor-pointer transition">
+              <div
+                // Permit login with google
+                onClick={() => signIn("google", { callbackUrl: "/" })}
+                className="bg-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-80 cursor-pointer transition"
+              >
                 <FcGoogle size={25} />
               </div>
               <div

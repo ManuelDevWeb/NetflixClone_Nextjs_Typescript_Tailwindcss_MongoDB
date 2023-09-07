@@ -29,6 +29,9 @@ import {compare} from  'bcrypt'
 export default NextAuth({
   providers: [
     // OAuth authentication with Github
+    /**
+     * This fuction return a Profile with id, name, email and image
+     */
     GithubProvider({
       clientId: process.env.GITHUB_ID || '',
       clientSecret: process.env.GITHUB_SECRET || '',
