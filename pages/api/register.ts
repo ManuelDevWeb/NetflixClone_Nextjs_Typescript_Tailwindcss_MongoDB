@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next";
 
+// Prisma connection
 import prismadb from "@/lib/prismadb";
 
 // URL: /api/register
