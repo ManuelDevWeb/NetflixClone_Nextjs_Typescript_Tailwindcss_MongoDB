@@ -4,7 +4,7 @@ import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 // Custom hooks
-import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useFetchData } from "@/hooks/useFetchData";
 
 // Protecting the route (Context is only available on the server and called on every request by default)
 export async function getServerSideProps(context: NextPageContext) {
@@ -27,7 +27,7 @@ export async function getServerSideProps(context: NextPageContext) {
 const Profiles = () => {
   const router = useRouter();
 
-  const { data: userInfo } = useCurrentUser();
+  const { data: userInfo } = useFetchData("api/current");
 
   return (
     <div className="flex items-center justify-center h-full">

@@ -3,9 +3,10 @@ import { signOut, getSession } from "next-auth/react";
 
 // Components
 import Navbar from "@/components/Navbar";
+import Bilboard from "@/components/Bilboard";
 
 // Custom hooks
-import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useFetchData } from "@/hooks/useFetchData";
 
 import { Inter } from "next/font/google";
 
@@ -30,7 +31,7 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 export default function Home() {
-  const { data: userInfo } = useCurrentUser();
+  // const { data: userInfo } = useFetchData("api/current");
 
   return (
     <>
@@ -39,6 +40,7 @@ export default function Home() {
       <button className="h-10 w-full bg-white" onClick={() => signOut()}>
         Sign Out
       </button> */}
+      <Bilboard />
     </>
   );
 }

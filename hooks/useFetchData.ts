@@ -4,9 +4,15 @@ import userSWR from 'swr';
 // Fetcher
 import fetcher from '@/lib/fetcher';
 
-const useCurrentUser=()=>{
+interface optionsSWR {
+    revalidateOnFocus?: boolean,
+    revalidateOnReconnect?: boolean,
+    revalidateIfStale?: boolean,
+}
+
+const useFetchData=(URI: string, options?:optionsSWR)=>{
     // The URL sended to the fetcher is the same sended to the hook userSWR
-    const {data, error, isLoading, mutate}=userSWR('/api/current', fetcher)
+    const {data, error, isLoading, mutate}=userSWR(URI, fetcher, options)
 
     return {
         data,
@@ -16,4 +22,4 @@ const useCurrentUser=()=>{
     }
 }
 
-export  {useCurrentUser};
+export { useFetchData };
