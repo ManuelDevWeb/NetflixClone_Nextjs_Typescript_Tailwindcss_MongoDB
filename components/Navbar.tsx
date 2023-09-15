@@ -9,7 +9,7 @@ import NavbarItem from "./NavbarItem";
 import MobileMenu from "./MobileMenu";
 import AccountMenu from "./AccountMenu";
 
-const TOP_OFFET = 66;
+const TOP_OFFSET = 66;
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -18,18 +18,18 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= TOP_OFFET) {
+      if (window.scrollY >= TOP_OFFSET) {
         setShpwBackground(true);
       } else {
         setShpwBackground(false);
       }
-    };
 
-    window.addEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll);
 
-    // Remove event listener on cleanup (This is important to prevent memory leaks and better performance)
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+      // Remove event listener on cleanup (This is important to prevent memory leaks and better performance)
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     };
   }, []);
 
