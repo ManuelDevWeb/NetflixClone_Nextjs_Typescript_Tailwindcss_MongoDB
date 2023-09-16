@@ -14,14 +14,17 @@ const TOP_OFFSET = 66;
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
-  const [showBackground, setShpwBackground] = useState(false);
+  const [showBackground, setShowBackground] = useState(false);
 
   useEffect(() => {
+    console.log("useEffect");
+    console.log(window.scrollY);
     const handleScroll = () => {
+      console.log(window.scrollY);
       if (window.scrollY >= TOP_OFFSET) {
-        setShpwBackground(true);
+        setShowBackground(true);
       } else {
-        setShpwBackground(false);
+        setShowBackground(false);
       }
 
       window.addEventListener("scroll", handleScroll);

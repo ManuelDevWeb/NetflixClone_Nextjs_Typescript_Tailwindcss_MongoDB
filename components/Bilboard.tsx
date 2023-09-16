@@ -15,19 +15,23 @@ interface movie {
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 const Bilboard = () => {
-  const randomMovie: movie = useFetchData("api/random").data;
+  const randomMovie: movie = useFetchData("api/random", {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  }).data;
 
   return (
     <div className="relative h-[56.25vw]">
       <video
-        className="w-full h-[56.25vh] object-cover brightness-[60%] "
+        className="w-full h-[56.25vw] object-cover brightness-[60%] "
         autoPlay
         muted
         loop
         src={randomMovie?.videoUrl}
         poster={randomMovie?.thumbnailUrl}
       ></video>
-      <div className="absolute top-[30%] md:top-[40%] lg:top-[25%] xl:top-[20%] ml-4 md:ml-16">
+      <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16">
         <p className="text-white text-xl md:text-5xl h-full w-[50%] lg:text-6xl font-bold drop-shadow-xl">
           {randomMovie?.title}
         </p>

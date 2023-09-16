@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 // Prisma connection
 import prismadb from "@/lib/prismadb";
+
+// Function to check if user is logged in and return user info
 import serverAuth from "@/lib/serverAuth";
 
 // URL: /api/random

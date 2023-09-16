@@ -4,6 +4,7 @@ import { signOut, getSession } from "next-auth/react";
 // Components
 import Navbar from "@/components/Navbar";
 import Bilboard from "@/components/Bilboard";
+import MovieList from "@/components/MovieList";
 
 // Custom hooks
 import { useFetchData } from "@/hooks/useFetchData";
@@ -31,7 +32,11 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 export default function Home() {
-  // const { data: userInfo } = useFetchData("api/current");
+  const { data: movies = [] } = useFetchData("api/movies", {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   return (
     <>
@@ -41,6 +46,9 @@ export default function Home() {
         Sign Out
       </button> */}
       <Bilboard />
+      <div className="pb-40">
+        <MovieList title="Trending Now" data={movies} />
+      </div>
     </>
   );
 }
