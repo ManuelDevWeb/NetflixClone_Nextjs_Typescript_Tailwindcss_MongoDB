@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+// Components
+import { FavoriteButton } from "./FavoriteButton";
+
 interface movie {
   id: string;
   title: string;
@@ -27,6 +30,8 @@ const MovieCard = ({ data }: MovieCardProps) => {
         <div className="cursor-pointer object-cover transition duration shadow-xl rounded-t-md w-full h-[12vw]">
           <Image src={data.thumbnailUrl} alt="Thumbnail" fill />
         </div>
+
+        {/* Info and logo */}
         <div className="z-10 bg-zinc-800 p-2 lg:p-4 absolute w-full transition shadow-md rounded-b-md">
           <div className="flex items-center gap-3">
             <div
@@ -35,6 +40,7 @@ const MovieCard = ({ data }: MovieCardProps) => {
             >
               <BsFillPlayFill size={30} />
             </div>
+            <FavoriteButton movieId={data?.id} />
           </div>
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>{" "}

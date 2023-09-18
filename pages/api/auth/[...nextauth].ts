@@ -11,7 +11,7 @@
     /api/auth/segmento1/segmento2: El valor de segments será ['segmento1', 'segmento2'].
  */
 
-import NextAuth, { RequestInternal } from 'next-auth'
+import NextAuth, { AuthOptions } from 'next-auth'
 
 // NextAuth Providers
 import Credentials from 'next-auth/providers/credentials'
@@ -26,20 +26,20 @@ import prismadb from '@/lib/prismadb'
 
 import {compare} from  'bcrypt'
 
-export default NextAuth({
+export const authOptions: AuthOptions = {
   providers: [
     // OAuth authentication with Github
     /**
      * This fuction return a Profile with id, name, email and image
      */
     GithubProvider({
-      clientId: process.env.GITHUB_ID || '',
-      clientSecret: process.env.GITHUB_SECRET || '',
+      clientId: process.env.GITHUB_ID || "",
+      clientSecret: process.env.GITHUB_SECRET || "",
     }),
     // OAuth authentication with Google
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || '',
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
     Credentials({
       id: "credentials",
@@ -99,4 +99,6 @@ export default NextAuth({
     secret: process.env.NEXTAUTH_JWT_SECRET,
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
+
+export default NextAuth(authOptions)

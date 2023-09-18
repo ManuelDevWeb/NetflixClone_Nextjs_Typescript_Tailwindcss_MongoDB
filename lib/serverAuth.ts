@@ -1,14 +1,15 @@
-import { NextApiRequest } from "next";
-import { getSession } from "next-auth/react";
+import { NextApiRequest, NextApiResponse } from "next";
+import { getServerSession } from "next-auth";
 
 // Prisma connection
 import prismadb from '@/lib/prismadb'
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 // Function to check if user is logged in and return user info
-const serverAuth=async (req:NextApiRequest)=>{
+const serverAuth=async (req:NextApiRequest, res: NextApiResponse)=>{
     // Get user info from session
-    const session=await getSession({req})
-
+    const session = await getServerSession(req,res, authOptions);
+    
     if(!session?.user?.email){
         throw new Error('You must be logged in to do this')
     }
@@ -24,9 +25,7 @@ const serverAuth=async (req:NextApiRequest)=>{
         throw new Error('You must be logged in to do this')
     }
 
-    return {
-        currentUser
-    }
+    return currentUser
 }
 
 export default serverAuth

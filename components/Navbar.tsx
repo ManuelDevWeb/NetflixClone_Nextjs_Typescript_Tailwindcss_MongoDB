@@ -17,8 +17,6 @@ const Navbar = () => {
   const [showBackground, setShowBackground] = useState(false);
 
   useEffect(() => {
-    console.log("useEffect");
-    console.log(window.scrollY);
     const handleScroll = () => {
       console.log(window.scrollY);
       if (window.scrollY >= TOP_OFFSET) {
@@ -26,13 +24,13 @@ const Navbar = () => {
       } else {
         setShowBackground(false);
       }
+    };
 
-      window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-      // Remove event listener on cleanup (This is important to prevent memory leaks and better performance)
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
+    // Remove event listener on cleanup (This is important to prevent memory leaks and better performance)
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 

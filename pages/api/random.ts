@@ -17,7 +17,7 @@ export default async function handler(
 
   try {
     // Function to check if user is logged in and return user info
-    await serverAuth(req);
+    await serverAuth(req, res);
 
     // Get number of movies in database
     const movieCount=await prismadb.movie.count();

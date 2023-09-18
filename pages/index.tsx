@@ -38,6 +38,12 @@ export default function Home() {
     revalidateOnReconnect: false,
   });
 
+  const { data: favoritesUser = [] } = useFetchData("api/favorites", {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
   return (
     <>
       <Navbar />
@@ -48,6 +54,7 @@ export default function Home() {
       <Bilboard />
       <div className="pb-40">
         <MovieList title="Trending Now" data={movies} />
+        <MovieList title="My List" data={favoritesUser} />
       </div>
     </>
   );
