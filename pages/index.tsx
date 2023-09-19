@@ -5,9 +5,11 @@ import { signOut, getSession } from "next-auth/react";
 import Navbar from "@/components/Navbar";
 import Bilboard from "@/components/Bilboard";
 import MovieList from "@/components/MovieList";
+import { InfoModal } from "@/components/InfoModal";
 
 // Custom hooks
 import { useFetchData } from "@/hooks/useFetchData";
+import { useInfoModal } from "@/hooks/useInfoModal";
 
 import { Inter } from "next/font/google";
 
@@ -44,8 +46,12 @@ export default function Home() {
     revalidateOnReconnect: false,
   });
 
+  // Get openModal and closeModal from useInfoModal hook (zustand)
+  const { isOpen, closeModal } = useInfoModal();
+
   return (
     <>
+      <InfoModal visible={isOpen} onClose={closeModal} />
       <Navbar />
       {/* <p className="text-white">Logged in as: {userInfo?.name}</p>
       <button className="h-10 w-full bg-white" onClick={() => signOut()}>

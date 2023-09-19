@@ -12,6 +12,7 @@ const Watch = () => {
   // Get movieId from url
   const { movieId } = router.query;
 
+  // Get data from useMovie hook
   const { data: movie } = useMovie(movieId as string);
 
   return (

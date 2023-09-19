@@ -1,5 +1,8 @@
+import { useCallback } from "react";
+
 // Custom hooks
 import { useFetchData } from "@/hooks/useFetchData";
+import { useInfoModal } from "@/hooks/useInfoModal";
 
 // Components
 import { PlayButton } from "./PlayButton";
@@ -14,7 +17,12 @@ const Bilboard = () => {
     revalidateOnReconnect: false,
   }).data;
 
-  console.log(randomMovie);
+  // Get openModal from useInfoModal hook (zustand)
+  const { openModal } = useInfoModal();
+
+  const handleOpenModal = useCallback(() => {
+    openModal(randomMovie?.id);
+  }, [randomMovie?.id, openModal]);
 
   return (
     <div className="relative h-[56.25vw]">
@@ -35,7 +43,10 @@ const Bilboard = () => {
         </p>
         <div className="flex items-center mt-3 md:mt-4 gap-3">
           <PlayButton movieId={randomMovie?.id} />
-          <button className="bg-white text-white bg-opacity-30 rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-xs lg:text-lg font-semibold flex items-center hover:bg-opacity-20 transition">
+          <button
+            onClick={handleOpenModal}
+            className="bg-white text-white bg-opacity-30 rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-xs lg:text-lg font-semibold flex items-center hover:bg-opacity-20 transition"
+          >
             <AiOutlineInfoCircle className="mr-1 md:mr-2" />
             More Info
           </button>

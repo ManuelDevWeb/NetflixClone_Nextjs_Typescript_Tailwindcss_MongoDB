@@ -1,11 +1,16 @@
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 
+// Custom hooks
+import { useFetchData } from "@/hooks/useFetchData";
+
 interface AccountMenuProps {
   visible?: boolean;
 }
 
 const AccountMenu = ({ visible }: AccountMenuProps) => {
+  const { data: userInfo } = useFetchData("api/current");
+
   if (!visible) {
     return null;
   }
@@ -24,7 +29,7 @@ const AccountMenu = ({ visible }: AccountMenuProps) => {
             />
           </div>
           <p className="text-white text-sm group-hover/item:underline:">
-            Username
+            {userInfo?.name}
           </p>
         </div>
         <hr className="border-gray-600 h-1px my-4" />
